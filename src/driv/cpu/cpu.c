@@ -197,26 +197,12 @@ static void priv_setup_clocks(void) {
 }
 
 static inline void priv_setup_nvic(void) {
-	// Set interrupt group priority for I2C1 module
-	hw_nvic->IP[NVIC_IRQn_I2C1] = NVIC_Prio_i2c << NVIC_IP_Prio_Shift;
+	// Set interrupt group priority for UART0
+	hw_nvic->IP[NVIC_IRQn_UART0] = NVIC_Prio_uart << NVIC_IP_Prio_Shift;
 
-	// Set interrupt group priority for UART0 (upccomm) module
-	hw_nvic->IP[NVIC_IRQn_UART0_ERR] = NVIC_Prio_uart << NVIC_IP_Prio_Shift;
-	hw_nvic->IP[NVIC_IRQn_UART0_RX_TX] = NVIC_Prio_uart << NVIC_IP_Prio_Shift;
+	// Configure USB interrupts in NVIC
+	hw_nvic->IP[NVIC_IRQn_USB0] = NVIC_Prio_usb << NVIC_IP_Prio_Shift;
 
-	// Setup interrupt group priority for Plutobus CAN (pbcan) module
-	hw_nvic->IP[NVIC_IRQn_CAN1_ORed_Message_buffer] = NVIC_Prio_can_plutobus << NVIC_IP_Prio_Shift;
-	hw_nvic->IP[NVIC_IRQn_CAN1_Bus_Off] = NVIC_Prio_can_plutobus << NVIC_IP_Prio_Shift;
-	hw_nvic->IP[NVIC_IRQn_CAN1_Error] = NVIC_Prio_can_plutobus << NVIC_IP_Prio_Shift;
-	hw_nvic->IP[NVIC_IRQn_CAN1_Tx_Warning] = NVIC_Prio_can_plutobus << NVIC_IP_Prio_Shift;
-	hw_nvic->IP[NVIC_IRQn_CAN1_Rx_Warning] = NVIC_Prio_can_plutobus << NVIC_IP_Prio_Shift;
-	hw_nvic->IP[NVIC_IRQn_CAN1_Wake_Up] = NVIC_Prio_can_plutobus << NVIC_IP_Prio_Shift;
-
-	// Setup interrupt priority for FTM1 (cycdynsched)
-	hw_nvic->IP[NVIC_IRQn_FTM1] = NVIC_Prio_timer << NVIC_IP_Prio_Shift;
-
-	// Setup interrupt priority for FTM2 (crgpmpsched)
-	hw_nvic->IP[NVIC_IRQn_FTM2] = NVIC_Prio_chp << NVIC_IP_Prio_Shift;
 	// TODO
 }
 
